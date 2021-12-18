@@ -1,5 +1,9 @@
---VHDL 1076-2008 
---ALU Testbench
+-------------------------------------
+--VHDL Version: 1076-2008
+--Tool name:	Aldec Active HDL 11.1
+--Module Name:  alu_testbench
+--Description:  Testbench to evaluate the alu module
+-------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -315,6 +319,90 @@ begin
 				report "packssdw: Success." severity note;
 			else
 				report "packssdw: Failed." severity error;
+			end if;
+			wait for period; 
+			
+			--packsswb
+			ins  <= B"0010101_00000000_000_000_000";
+			src	 <= X"8000_7FFF_00AE_800E";
+			dest <=	X"FFFF_0005_0000_0010";
+			
+			wait for period;  
+			
+			if(res = X"80_7F_7F_80_FF_05_00_10") then	
+				report "packsswb: Success." severity note;
+			else
+				report "packsswb: Failed." severity error;
+			end if;
+			wait for period;
+			
+			--packusdw
+			ins  <= B"0010110_00000000_000_000_000";
+			src	 <= X"80000000_7FFFFFFF";
+			dest <=	X"00000005_000000AE";
+			
+			wait for period;  
+			
+			if(res = X"FFFF_FFFF_0005_00AE") then	
+				report "packusdw: Success." severity note;
+			else
+				report "packusdw: Failed." severity error;
+			end if;
+			wait for period;
+			
+			--packuswb
+			ins  <= B"0010111_00000000_000_000_000";
+			src	 <= X"8000_7FFF_00AE_800E";
+			dest <=	X"FFFF_0005_0000_0010";
+			
+			wait for period;  
+			
+			if(res = X"FF_FF_AE_FF_FF_05_00_10") then	
+				report "packuswb: Success." severity note;
+			else
+				report "packuswb: Failed." severity error;
+			end if;
+			wait for period; 
+			
+			--punpcklbw
+			ins  <= B"0011000_00000000_000_000_000";
+			src	 <= X"80_00_7F_FF_00_AE_80_0E";
+			dest <=	X"FF_FF_00_05_00_01_00_01";
+			
+			wait for period;  
+			
+			if(res = X"00_00_AE_01_80_00_0E_01") then	
+				report "punpcklbw: Success." severity note;
+			else
+				report "punpcklbw: Failed." severity error;
+			end if;
+			wait for period;  
+			
+			--punpcklwd
+			ins  <= B"0011001_00000000_000_000_000";
+			src	 <= X"8000_7FFF_00AE_800E";
+			dest <=	X"FFFF_0005_0001_0001";
+			
+			wait for period;  
+			
+			if(res = X"00AE_0001_800E_0001") then	
+				report "punpcklwd: Success." severity note;
+			else
+				report "punpcklwd: Failed." severity error;
+			end if;
+			wait for period;
+			
+			--punpckldq
+			ins  <= B"0011010_00000000_000_000_000";
+			src	 <= X"80007FFF_00AE800E";
+			dest <=	X"FFFF0005_00010001";
+			
+			wait for period;  
+			
+			if(res = X"00AE800E_00010001") then	
+				report "punpckldq: Success." severity note;
+			else
+				report "punpckldq: Failed." severity error;
 			end if;
 			wait for period;
 

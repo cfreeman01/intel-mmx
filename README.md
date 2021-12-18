@@ -46,8 +46,8 @@ Complete reference can be found here: https://www.csie.ntu.edu.tw/~cyy/courses/a
 |   **packusdw** src, dest   |    Convert double-words to words by unsigned saturation      |    0010110     |
 |   **packuswb** src, dest   |    Convert words to bytes by unsigned saturation      |    0010111     |
 |   **punpcklbw** src, dest   |   Unpack the lower four bytes from *src* and *dest* and store them as interleaved bytes in *dest*.       |   0011000      |
-|   **punpcklwd** src, dest   |    Unpack the lower two words from *src* and *dest* and store them as interleaved words in *dest*.      |   0011010      |
-|   **punpckldq** src, dest   |    Unpack the bottom double-words of two registers and store them in *dest*.      |   0011001      |
+|   **punpcklwd** src, dest   |    Unpack the lower two words from *src* and *dest* and store them as interleaved words in *dest*.      |   0011001      |
+|   **punpckldq** src, dest   |    Unpack the bottom double-words of two registers and store them in *dest*.      |   0011010      |
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbLTcxMTc0MTk3Miw2NTU1MDMyMzUsMzA4Nj
 cyNTIsLTIwMjk4NDU4NTMsLTEzMTE5Mjc1MDMsLTEwMDkzNjgy

@@ -1,5 +1,10 @@
---VHDL 1076-2008 
---ALU
+-------------------------------------
+--VHDL Version: 1076-2008
+--Tool name:	Aldec Active HDL 11.1
+--Module Name:  alu
+--Description:  Accepts two operands from register file and a 3-byte
+--instruction, executes the instruction, and outputs the result
+-------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -79,7 +84,7 @@ begin
 end add_usw_saturated;
 
 --SATURATED PACKING FUNCTIONS:
---Convert double-word to word by saturation
+--Convert signed double-word to word by saturation
 function pack_dw_signed_saturated(d: signed(31 downto 0)) return signed is
 variable result: signed(15 downto 0);
 begin			  
@@ -93,6 +98,43 @@ begin
 	return result;
 end pack_dw_signed_saturated;
 
+--Convert signed word to byte by saturation
+function pack_wb_signed_saturated(w: signed(15 downto 0)) return signed is
+variable result: signed(7 downto 0);
+begin			  
+	if(w < -128) then
+		result := X"80";
+	elsif(w > 127) then
+		result := X"7F";
+	else 
+		result := w(7 downto 0);
+	end if;
+	return result;
+end pack_wb_signed_saturated;
+
+--Convert unsigned double-word to word by saturation
+function pack_dw_unsigned_saturated(d: unsigned(31 downto 0)) return unsigned is
+variable result: unsigned(15 downto 0);
+begin			  
+	if(d > 65535) then
+		result := X"FFFF";
+	else 
+		result := d(15 downto 0);
+	end if;
+	return result;
+end pack_dw_unsigned_saturated;
+
+--Convert unsigned word to byte by saturation
+function pack_wb_unsigned_saturated(w: unsigned(15 downto 0)) return unsigned is
+variable result: unsigned(7 downto 0);
+begin			  
+	if(w > 255) then
+		result := X"FF";
+	else 
+		result := w(7 downto 0);
+	end if;
+	return result;
+end pack_wb_unsigned_saturated;
 
 --INSTRUCTIONS:
 --pldi
@@ -160,10 +202,12 @@ begin
 end psrld;	
 
 --psrlq
-impure function psrlq return std_logic_vector is		 
+impure function psrlq return std_logic_vector is	
+variable result: std_logic_vector(63 downto 0) := (others=>'0');
 variable shamt:  integer := to_integer(unsigned(ins(16 downto 9)));
 begin	 
-	return dest srl shamt;
+	result := dest srl shamt;  
+	return result;
 end psrlq;	 
 
 --paddb
@@ -280,7 +324,103 @@ begin
 	result(47 downto 32) := std_logic_vector(word2);
 	result(63 downto 48) := std_logic_vector(word3);
 	return result;
-end packssdw;
+end packssdw; 
+
+--packsswb
+impure function packsswb return std_logic_vector is		 
+variable result: std_logic_vector(63 downto 0) := (others=>'0');
+variable byte7: signed(7 downto 0) := pack_wb_signed_saturated(signed(src(63 downto 48))); 
+variable byte6: signed(7 downto 0) := pack_wb_signed_saturated(signed(src(47 downto 32)));
+variable byte5: signed(7 downto 0) := pack_wb_signed_saturated(signed(src(31 downto 16)));
+variable byte4: signed(7 downto 0) := pack_wb_signed_saturated(signed(src(15 downto 0)));
+variable byte3: signed(7 downto 0) := pack_wb_signed_saturated(signed(dest(63 downto 48)));
+variable byte2: signed(7 downto 0) := pack_wb_signed_saturated(signed(dest(47 downto 32)));
+variable byte1: signed(7 downto 0) := pack_wb_signed_saturated(signed(dest(31 downto 16)));
+variable byte0: signed(7 downto 0) := pack_wb_signed_saturated(signed(dest(15 downto 0)));
+begin	 	  
+	result(7 downto 0)   := std_logic_vector(byte0);
+	result(15 downto 8)  := std_logic_vector(byte1);
+	result(23 downto 16) := std_logic_vector(byte2);
+	result(31 downto 24) := std_logic_vector(byte3);
+	result(39 downto 32) := std_logic_vector(byte4);
+	result(47 downto 40) := std_logic_vector(byte5);
+	result(55 downto 48) := std_logic_vector(byte6);
+	result(63 downto 56) :=	std_logic_vector(byte7);
+	return result;
+end packsswb;
+
+--packusdw
+impure function packusdw return std_logic_vector is		 
+variable result: std_logic_vector(63 downto 0) := (others=>'0');
+variable word3: unsigned(15 downto 0) := pack_dw_unsigned_saturated(unsigned(src(63 downto 32)));
+variable word2: unsigned(15 downto 0) := pack_dw_unsigned_saturated(unsigned(src(31 downto 0)));
+variable word1: unsigned(15 downto 0) := pack_dw_unsigned_saturated(unsigned(dest(63 downto 32)));
+variable word0: unsigned(15 downto 0) := pack_dw_unsigned_saturated(unsigned(dest(31 downto 0)));
+begin	 	  
+	result(15 downto 0)  := std_logic_vector(word0);
+	result(31 downto 16) := std_logic_vector(word1);
+	result(47 downto 32) := std_logic_vector(word2);
+	result(63 downto 48) := std_logic_vector(word3);
+	return result;
+end packusdw; 
+
+--packuswb
+impure function packuswb return std_logic_vector is		 
+variable result: std_logic_vector(63 downto 0) := (others=>'0');
+variable byte7: unsigned(7 downto 0) := pack_wb_unsigned_saturated(unsigned(src(63 downto 48))); 
+variable byte6: unsigned(7 downto 0) := pack_wb_unsigned_saturated(unsigned(src(47 downto 32)));
+variable byte5: unsigned(7 downto 0) := pack_wb_unsigned_saturated(unsigned(src(31 downto 16)));
+variable byte4: unsigned(7 downto 0) := pack_wb_unsigned_saturated(unsigned(src(15 downto 0)));
+variable byte3: unsigned(7 downto 0) := pack_wb_unsigned_saturated(unsigned(dest(63 downto 48)));
+variable byte2: unsigned(7 downto 0) := pack_wb_unsigned_saturated(unsigned(dest(47 downto 32)));
+variable byte1: unsigned(7 downto 0) := pack_wb_unsigned_saturated(unsigned(dest(31 downto 16)));
+variable byte0: unsigned(7 downto 0) := pack_wb_unsigned_saturated(unsigned(dest(15 downto 0)));
+begin	 	  
+	result(7 downto 0)   := std_logic_vector(byte0);
+	result(15 downto 8)  := std_logic_vector(byte1);
+	result(23 downto 16) := std_logic_vector(byte2);
+	result(31 downto 24) := std_logic_vector(byte3);
+	result(39 downto 32) := std_logic_vector(byte4);
+	result(47 downto 40) := std_logic_vector(byte5);
+	result(55 downto 48) := std_logic_vector(byte6);
+	result(63 downto 56) :=	std_logic_vector(byte7);
+	return result;
+end packuswb;  
+
+--punpcklbw
+impure function punpcklbw return std_logic_vector is		 
+variable result: std_logic_vector(63 downto 0) := (others=>'0');
+begin
+	result(7 downto 0)   := dest(7 downto 0);
+	result(15 downto 8)  := src(7 downto 0);
+	result(23 downto 16) := dest(15 downto 8);
+	result(31 downto 24) := src(15 downto 8);
+	result(39 downto 32) := dest(23 downto 16);
+	result(47 downto 40) := src(23 downto 16);
+	result(55 downto 48) := dest(31 downto 24);
+	result(63 downto 56) :=	src(31 downto 24);
+	return result;
+end punpcklbw; 	
+
+--punpcklwd
+impure function punpcklwd return std_logic_vector is		 
+variable result: std_logic_vector(63 downto 0) := (others=>'0');
+begin
+	result(15 downto 0)  := dest(15 downto 0);
+	result(31 downto 16) := src(15 downto 0);
+	result(47 downto 32) := dest(31 downto 16);
+	result(63 downto 48) := src(31 downto 16);
+	return result;
+end punpcklwd;
+
+--punpckldq	
+impure function punpckldq return std_logic_vector is		 
+variable result: std_logic_vector(63 downto 0) := (others=>'0');
+begin 
+	result(31 downto 0)  := dest(31 downto 0);
+	result(63 downto 32) := src(31 downto 0);   
+	return result;
+end punpckldq;
 
 --Main ALU operation
 begin	
@@ -310,6 +450,12 @@ begin
 			when "0010010" => res <= paddusw;	
 			when "0010011" => res <= paddd;	
 			when "0010100" => res <= packssdw;
+			when "0010101" => res <= packsswb;
+			when "0010110" => res <= packusdw;
+			when "0010111" => res <= packuswb;
+			when "0011000" => res <= punpcklbw;	
+			when "0011001" => res <= punpcklwd;	 
+			when "0011010" => res <= punpckldq;
 			when others => res <= X"XXXXXXXXXXXXXXXX";			
 		end case;  
 		
