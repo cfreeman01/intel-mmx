@@ -142,12 +142,21 @@ begin
 				write(out_line, "Write Destination: ", left, 50); 
 				write(out_line, "mm" & integer'image(to_integer(unsigned(instr_ex_wb_out(2 downto 0)))));
 				writeLine(results_file, out_line);
-			end if;
+			end if;	
 			
+			-------WRITE REGISTER FILE TO OUTPUT FILE-------
+			write(out_line, "REGISTER FILE:", left, 50);
+			writeLine(results_file, out_line);
+			for i in 7 downto 0 loop
+				write(out_line, "mm" & integer'image(i) & ":  ");
+				write(out_line, to_hstring(unsigned(reg_file(i))));
+				writeLine(results_file, out_line);
+			end loop;
+			
+			--------------ADVANCE CLOCK AND PC--------------
 			clk <= '1';
 			wait for period/2;
-			clk <= '0';	
-			
+			clk <= '0';			
 			PC <= PC + 1;
 			
 		end loop; 

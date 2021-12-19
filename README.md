@@ -1,5 +1,5 @@
 ## 3-Byte Instruction Format
-| **23:17** Opcode | **16:9** Immediate Value | **7:5** Load Index |   **5:3** Source Register    | **2:0** Destination Register |
+| **23:17** Opcode | **16:9** Immediate Value | **8:6** Load Index |   **5:3** Source Register    | **2:0** Destination Register |
 |------------------|--------------------------|--------------------|------------------------------|------------------------------|
 ## Instruction List
 Complete reference can be found here: https://www.csie.ntu.edu.tw/~cyy/courses/assembly/docs/ch11_MMX.pdf

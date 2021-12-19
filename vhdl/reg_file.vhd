@@ -34,7 +34,7 @@ signal reg_array: vec_array64(7 downto 0)               --Registers MM0-MM7
 begin
 	
 	read:  --Combinationally read a value from the register file
-	process(instr,clk,wrt_enable,reg_write,wrt_data) 
+	process(instr,clk,wrt_enable,reg_write,wrt_data,reg_array) 
 	variable src_read:  std_logic_vector(2 downto 0) := "000"; --selects registers to read
 	variable dest_read: std_logic_vector(2 downto 0) := "000";
 	begin  

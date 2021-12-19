@@ -11,14 +11,12 @@ std::map<std::string, char> register_map = init_register_map();
 std::map<std::string, uint32_t> ins_map  = init_instruction_map();
 std::map<std::string, INS_TYPE> ins_type_map = init_instype_map();
 
-//FUNCTION DECLARATIONS
 uint32_t parse_instruction(char buffer[BUFF_SIZE]);  //parse a line of input (one instruction)
 uint32_t get_register(std::string token);            //parse individual tokens
 uint32_t get_load_index(std::string token);
-uint32_t get_16bit_immediate(std::string token);
-INS_TYPE get_type(std::string ins_name);            //get type of instruction based on name
+uint32_t get_8bit_immediate(std::string token);
 std::vector<std::string> split_string(std::string s, std::string delim);  //split a string 
-void write_three_bytes(uint32_t data, std::ofstream& of);                  //write 'data' to output stream as four bytes
+void write_three_bytes(uint32_t data, std::ofstream& of);                 //write instruction to output stream
 
 int main(int argc, char* argv[]) {
 
@@ -55,7 +53,8 @@ int main(int argc, char* argv[]) {
 		in_stream.getline(buffer, BUFF_SIZE);  //read next line
 
 		if (in_stream.fail()) {  //no characters read
-			in_stream.clear(in_stream.failbit);
+			if (in_stream.eof()) break;
+			in_stream.clear();
 			continue;
 		}
 
@@ -83,14 +82,43 @@ uint32_t parse_instruction(char buffer[BUFF_SIZE]) {
 	uint32_t ins_code = ins_map[tokens[0]];
 	uint32_t src, dest, load_index, immediate;
 
-	switch (type) {
+	switch (type) {  //read arguments based on type of instruction
+	case INS_TYPE::PLDI:
+		if (tokens.size() != 4) {
+			std::cerr << "ERROR LINE " << line_num << ": Improper number of arguments.";
+			exit(1);
+		}
+		immediate = get_8bit_immediate(tokens[1]) << 9;
+		load_index = get_load_index(tokens[2]) << 6;
+		dest = get_register(tokens[3]);
+		ins_code |= immediate | load_index | dest;
+		break;
 
+	case INS_TYPE::TWO_REG:
+		if (tokens.size() != 3) {
+			std::cerr << "ERROR LINE " << line_num << ": Improper number of arguments.";
+			exit(1);
+		}
+		src = get_register(tokens[1]) << 3;
+		dest = get_register(tokens[2]);
+		ins_code |= src | dest;
+		break;
+
+	case INS_TYPE::IMM_REG:
+		if (tokens.size() != 3) {
+			std::cerr << "ERROR LINE " << line_num << ": Improper number of arguments.";
+			exit(1);
+		}
+		immediate = get_8bit_immediate(tokens[1]) << 9;
+		dest = get_register(tokens[2]);
+		ins_code |= immediate | dest;
+		break;
 	}
 
 	return ins_code;
 }
 
-//get the 5-bit code for a register from its string token
+//get the 3-bit code for a register from its string token
 uint32_t get_register(std::string token) {
 	if (register_map.find(token) == register_map.end()) {
 		std::cerr << "ERROR LINE " << line_num << ": Register name invalid.";
@@ -110,10 +138,10 @@ uint32_t get_load_index(std::string token) {
 }
 
 //get 16-bit immediate value from string token
-uint32_t get_16bit_immediate(std::string token){
+uint32_t get_8bit_immediate(std::string token){
 	uint32_t imm = stoi(token);
 	if (imm > UINT8_MAX) {
-		std::cerr << "ERROR LINE " << line_num << ": Immediate value too large.";
+		std::cerr << "ERROR LINE " << line_num << ": Immediate value out of range.";
 		exit(1);
 	}
 	return imm;

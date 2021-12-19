@@ -13,7 +13,7 @@ use work.all;
 entity mmx_unit is
 	port(
 	clk: in std_logic;	
-	PC: in integer;                                  --program counter input to instruction buffer
+	PC:  in integer;                                 --program counter input to instruction buffer
 	instr_written: in std_logic_vector(23 downto 0); --instruction to write to instruction buffer
 	ib_wrt_enable: in std_logic                      --wrt_enable input to instruction buffer
 	);

@@ -29,7 +29,7 @@ signal instr_array: vec24_array(0 to 127); --instruction buffer holds 128 instru
 begin 
 	
 	instr_fetch:  --Fetch an instruction combinationally
-	process(PC, instr_written) 
+	process(clk, PC, wrt_enable, instr_written) 
 	begin		 
 		if(wrt_enable = '0') then
 			instr_fetched <= instr_array(PC);

@@ -1,0 +1,370 @@
+==============CYCLE 0==============
+Instruction buffer output:                        0x01FF40
+IF/ID register output:                            0xXXXXXX
+ALU Src Input:                                    mm0
+ALU Dest Input:                                   mm0
+ALU Input Instruction:                            0xXXXXXX
+ALU Output:                                       0xXXXXXXXXXXXXXXXX
+Write Enable:                                     '0'
+REGISTER FILE:                                    
+mm7:  0000000000000000
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  0000000000000000
+mm3:  0000000000000000
+mm2:  0000000000000000
+mm1:  0000000000000000
+mm0:  0000000000000000
+==============CYCLE 1==============
+Instruction buffer output:                        0x040007
+IF/ID register output:                            0x01FF40
+ALU Src Input:                                    mm0
+ALU Dest Input:                                   mm0
+ALU Input Instruction:                            0xXXXXXX
+ALU Output:                                       0xXXXXXXXXXXXXXXXX
+Write Enable:                                     '0'
+REGISTER FILE:                                    
+mm7:  0000000000000000
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  0000000000000000
+mm3:  0000000000000000
+mm2:  0000000000000000
+mm1:  0000000000000000
+mm0:  0000000000000000
+==============CYCLE 2==============
+Instruction buffer output:                        0x185007
+IF/ID register output:                            0x040007
+ALU Src Input:                                    mm0
+ALU Dest Input:                                   mm0
+ALU Input Instruction:                            0x01FF40
+ALU Output:                                       0x0000FF0000000000
+Write Enable:                                     '0'
+REGISTER FILE:                                    
+mm7:  0000000000000000
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  0000000000000000
+mm3:  0000000000000000
+mm2:  0000000000000000
+mm1:  0000000000000000
+mm0:  0000000000000000
+==============CYCLE 3==============
+Instruction buffer output:                        0x1A0007
+IF/ID register output:                            0x185007
+ALU Src Input:                                    mm0
+ALU Dest Input:                                   mm7
+ALU Input Instruction:                            0x040007
+ALU Output:                                       0x0000FF0000000000
+Write Enable:                                     '1'
+Write Data:                                       0x0000FF0000000000
+Write Destination:                                mm0
+REGISTER FILE:                                    
+mm7:  0000000000000000
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  0000000000000000
+mm3:  0000000000000000
+mm2:  0000000000000000
+mm1:  0000000000000000
+mm0:  0000FF0000000000
+==============CYCLE 4==============
+Instruction buffer output:                        0x141000
+IF/ID register output:                            0x1A0007
+ALU Src Input:                                    mm0
+ALU Dest Input:                                   mm7
+ALU Input Instruction:                            0x185007
+ALU Output:                                       0x00000000000000FF
+Write Enable:                                     '1'
+Write Data:                                       0x0000FF0000000000
+Write Destination:                                mm7
+REGISTER FILE:                                    
+mm7:  0000FF0000000000
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  0000000000000000
+mm3:  0000000000000000
+mm2:  0000000000000000
+mm1:  0000000000000000
+mm0:  0000FF0000000000
+==============CYCLE 5==============
+Instruction buffer output:                        0x2E0008
+IF/ID register output:                            0x141000
+ALU Src Input:                                    mm0
+ALU Dest Input:                                   mm7
+ALU Input Instruction:                            0x1A0007
+ALU Output:                                       0x0000FF00000000FF
+Write Enable:                                     '1'
+Write Data:                                       0x00000000000000FF
+Write Destination:                                mm7
+REGISTER FILE:                                    
+mm7:  00000000000000FF
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  0000000000000000
+mm3:  0000000000000000
+mm2:  0000000000000000
+mm1:  0000000000000000
+mm0:  0000FF0000000000
+==============CYCLE 6==============
+Instruction buffer output:                        0x162000
+IF/ID register output:                            0x2E0008
+ALU Src Input:                                    mm0
+ALU Dest Input:                                   mm0
+ALU Input Instruction:                            0x141000
+ALU Output:                                       0x000000FF00000000
+Write Enable:                                     '1'
+Write Data:                                       0x0000FF00000000FF
+Write Destination:                                mm7
+REGISTER FILE:                                    
+mm7:  0000FF00000000FF
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  0000000000000000
+mm3:  0000000000000000
+mm2:  0000000000000000
+mm1:  0000000000000000
+mm0:  0000FF0000000000
+==============CYCLE 7==============
+Instruction buffer output:                        0x020001
+IF/ID register output:                            0x162000
+ALU Src Input:                                    mm1
+ALU Dest Input:                                   mm0
+ALU Input Instruction:                            0x2E0008
+ALU Output:                                       0x0000000000FF0000
+Write Enable:                                     '1'
+Write Data:                                       0x000000FF00000000
+Write Destination:                                mm0
+REGISTER FILE:                                    
+mm7:  0000FF00000000FF
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  0000000000000000
+mm3:  0000000000000000
+mm2:  0000000000000000
+mm1:  0000000000000000
+mm0:  000000FF00000000
+==============CYCLE 8==============
+Instruction buffer output:                        0x0A000A
+IF/ID register output:                            0x020001
+ALU Src Input:                                    mm0
+ALU Dest Input:                                   mm0
+ALU Input Instruction:                            0x162000
+ALU Output:                                       0x00000000000000FF
+Write Enable:                                     '1'
+Write Data:                                       0x0000000000FF0000
+Write Destination:                                mm0
+REGISTER FILE:                                    
+mm7:  0000FF00000000FF
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  0000000000000000
+mm3:  0000000000000000
+mm2:  0000000000000000
+mm1:  0000000000000000
+mm0:  0000000000FF0000
+==============CYCLE 9==============
+Instruction buffer output:                        0x0C000A
+IF/ID register output:                            0x0A000A
+ALU Src Input:                                    mm0
+ALU Dest Input:                                   mm1
+ALU Input Instruction:                            0x020001
+ALU Output:                                       0x00000000000000FF
+Write Enable:                                     '1'
+Write Data:                                       0x00000000000000FF
+Write Destination:                                mm0
+REGISTER FILE:                                    
+mm7:  0000FF00000000FF
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  0000000000000000
+mm3:  0000000000000000
+mm2:  0000000000000000
+mm1:  0000000000000000
+mm0:  00000000000000FF
+==============CYCLE 10==============
+Instruction buffer output:                        0x300013
+IF/ID register output:                            0x0C000A
+ALU Src Input:                                    mm1
+ALU Dest Input:                                   mm2
+ALU Input Instruction:                            0x0A000A
+ALU Output:                                       0xFFFFFFFFFFFFFFFF
+Write Enable:                                     '1'
+Write Data:                                       0x00000000000000FF
+Write Destination:                                mm1
+REGISTER FILE:                                    
+mm7:  0000FF00000000FF
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  0000000000000000
+mm3:  0000000000000000
+mm2:  0000000000000000
+mm1:  00000000000000FF
+mm0:  00000000000000FF
+==============CYCLE 11==============
+Instruction buffer output:                        0x04001C
+IF/ID register output:                            0x300013
+ALU Src Input:                                    mm1
+ALU Dest Input:                                   mm2
+ALU Input Instruction:                            0x0C000A
+ALU Output:                                       0xFFFFFFFFFFFFFF00
+Write Enable:                                     '1'
+Write Data:                                       0xFFFFFFFFFFFFFFFF
+Write Destination:                                mm2
+REGISTER FILE:                                    
+mm7:  0000FF00000000FF
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  0000000000000000
+mm3:  0000000000000000
+mm2:  FFFFFFFFFFFFFFFF
+mm1:  00000000000000FF
+mm0:  00000000000000FF
+==============CYCLE 12==============
+Instruction buffer output:                        0x260004
+IF/ID register output:                            0x04001C
+ALU Src Input:                                    mm2
+ALU Dest Input:                                   mm3
+ALU Input Instruction:                            0x300013
+ALU Output:                                       0xFF00FF00FF000000
+Write Enable:                                     '1'
+Write Data:                                       0xFFFFFFFFFFFFFF00
+Write Destination:                                mm2
+REGISTER FILE:                                    
+mm7:  0000FF00000000FF
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  0000000000000000
+mm3:  0000000000000000
+mm2:  FFFFFFFFFFFFFF00
+mm1:  00000000000000FF
+mm0:  00000000000000FF
+==============CYCLE 13==============
+Instruction buffer output:                        0x040025
+IF/ID register output:                            0x260004
+ALU Src Input:                                    mm3
+ALU Dest Input:                                   mm4
+ALU Input Instruction:                            0x04001C
+ALU Output:                                       0xFF00FF00FF000000
+Write Enable:                                     '1'
+Write Data:                                       0xFF00FF00FF000000
+Write Destination:                                mm3
+REGISTER FILE:                                    
+mm7:  0000FF00000000FF
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  0000000000000000
+mm3:  FF00FF00FF000000
+mm2:  FFFFFFFFFFFFFF00
+mm1:  00000000000000FF
+mm0:  00000000000000FF
+==============CYCLE 14==============
+Instruction buffer output:                        0x32002E
+IF/ID register output:                            0x040025
+ALU Src Input:                                    mm0
+ALU Dest Input:                                   mm4
+ALU Input Instruction:                            0x260004
+ALU Output:                                       0xFF00FF00FF0000FF
+Write Enable:                                     '1'
+Write Data:                                       0xFF00FF00FF000000
+Write Destination:                                mm4
+REGISTER FILE:                                    
+mm7:  0000FF00000000FF
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  FF00FF00FF000000
+mm3:  FF00FF00FF000000
+mm2:  FFFFFFFFFFFFFF00
+mm1:  00000000000000FF
+mm0:  00000000000000FF
+==============CYCLE 15==============
+Instruction buffer output:                        0xXXXXXX
+IF/ID register output:                            0x32002E
+ALU Src Input:                                    mm4
+ALU Dest Input:                                   mm5
+ALU Input Instruction:                            0x040025
+ALU Output:                                       0xFF00FF00FF0000FF
+Write Enable:                                     '1'
+Write Data:                                       0xFF00FF00FF0000FF
+Write Destination:                                mm4
+REGISTER FILE:                                    
+mm7:  0000FF00000000FF
+mm6:  0000000000000000
+mm5:  0000000000000000
+mm4:  FF00FF00FF0000FF
+mm3:  FF00FF00FF000000
+mm2:  FFFFFFFFFFFFFF00
+mm1:  00000000000000FF
+mm0:  00000000000000FF
+==============CYCLE 16==============
+Instruction buffer output:                        0xXXXXXX
+IF/ID register output:                            0xXXXXXX
+ALU Src Input:                                    mm5
+ALU Dest Input:                                   mm6
+ALU Input Instruction:                            0x32002E
+ALU Output:                                       0xFF00000000FF0000
+Write Enable:                                     '1'
+Write Data:                                       0xFF00FF00FF0000FF
+Write Destination:                                mm5
+REGISTER FILE:                                    
+mm7:  0000FF00000000FF
+mm6:  0000000000000000
+mm5:  FF00FF00FF0000FF
+mm4:  FF00FF00FF0000FF
+mm3:  FF00FF00FF000000
+mm2:  FFFFFFFFFFFFFF00
+mm1:  00000000000000FF
+mm0:  00000000000000FF
+==============CYCLE 17==============
+Instruction buffer output:                        0xXXXXXX
+IF/ID register output:                            0xXXXXXX
+ALU Src Input:                                    mm0
+ALU Dest Input:                                   mm0
+ALU Input Instruction:                            0xXXXXXX
+ALU Output:                                       0xXXXXXXXXXXXXXXXX
+Write Enable:                                     '1'
+Write Data:                                       0xFF00000000FF0000
+Write Destination:                                mm6
+REGISTER FILE:                                    
+mm7:  0000FF00000000FF
+mm6:  FF00000000FF0000
+mm5:  FF00FF00FF0000FF
+mm4:  FF00FF00FF0000FF
+mm3:  FF00FF00FF000000
+mm2:  FFFFFFFFFFFFFF00
+mm1:  00000000000000FF
+mm0:  00000000000000FF
+==============CYCLE 18==============
+Instruction buffer output:                        0xXXXXXX
+IF/ID register output:                            0xXXXXXX
+ALU Src Input:                                    mm0
+ALU Dest Input:                                   mm0
+ALU Input Instruction:                            0xXXXXXX
+ALU Output:                                       0xXXXXXXXXXXXXXXXX
+Write Enable:                                     '0'
+REGISTER FILE:                                    
+mm7:  0000FF00000000FF
+mm6:  FF00000000FF0000
+mm5:  FF00FF00FF0000FF
+mm4:  FF00FF00FF0000FF
+mm3:  FF00FF00FF000000
+mm2:  FFFFFFFFFFFFFF00
+mm1:  00000000000000FF
+mm0:  00000000000000FF
+==============CYCLE 19==============
+Instruction buffer output:                        0xXXXXXX
+IF/ID register output:                            0xXXXXXX
+ALU Src Input:                                    mm0
+ALU Dest Input:                                   mm0
+ALU Input Instruction:                            0xXXXXXX
+ALU Output:                                       0xXXXXXXXXXXXXXXXX
+Write Enable:                                     '0'
+REGISTER FILE:                                    
+mm7:  0000FF00000000FF
+mm6:  FF00000000FF0000
+mm5:  FF00FF00FF0000FF
+mm4:  FF00FF00FF0000FF
+mm3:  FF00FF00FF000000
+mm2:  FFFFFFFFFFFFFF00
+mm1:  00000000000000FF
+mm0:  00000000000000FF
