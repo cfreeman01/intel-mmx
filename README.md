@@ -7,7 +7,7 @@ The pipelined VHDL unit consists of four stages separated by interstage register
 
  - **Instruction buffer**: Holds up to 128 3-byte instructions to be executed in the pipeline. Program counter (PC) input determines which instruction to read, and a *wrt_enable* signal allows the buffer to be sequentially written.
  - **Register file**: Conatins the 8 64-bit registers MM0-MM7. Can be read combinationally and written sequentially similarly to the instruction buffer.
- - **Forwarding unit**: If an instruction reads a resgister that was written by the previous instruction, the most recent value will not yet be in the register file to be read. The forwarding unit determines if this is the case, and redirects the new value to the ALU input if necessary.
+ - **Forwarding unit**: If an instruction reads a register that was written by the previous instruction, the most recent value will not yet be in the register file to be read. The forwarding unit determines if this is the case, and redirects the new value to the ALU input if necessary.
  - **Arithmetic and logic unit**: Reads two 64-bit data inputs and 1 instruction input, executes the appropriate instruction, and outputs the result.
 
 ## Instruction Set
