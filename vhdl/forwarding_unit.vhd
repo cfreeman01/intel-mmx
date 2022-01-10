@@ -43,10 +43,6 @@ begin
 		
 		if(wb_enable = '1') then  
 			
-			if(instr_id_ex = X"06000A") then
-				report("epic");
-			end if;
-			
 			if(wb_dest = src) then   --if the src for the current ALU instruction is the register currently being written, we need to forward	
 				src_out <= wb_data;
 			end if;	
